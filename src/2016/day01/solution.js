@@ -1,7 +1,7 @@
 "use strict";
 
 const fs = require('fs')
-const inputStr = 'R8, R4, R4, R8' //fs.readFileSync('./input.txt').toString()
+const inputStr = fs.readFileSync('./input.txt').toString()
 
 const answers = parseInput(inputStr)
 console.log(answers)
@@ -17,17 +17,18 @@ function parseInput(inputStr) {
   const endCoordinates = inputArr.reduce(({x, y}, itemStr) => {
     const relativeDirection = itemStr[0]
     const distance = parseInt(itemStr.slice(1), 10)
-
+    
     cardinalDirection = updateCardinalDirection(cardinalDirection, relativeDirection)
-    const newCoordinates = updateCoordinates({x, y}, cardinalDirection, distance)
 
-    if (!firstCoordinatesVisitedTwice && isInHistory(history, newCoordinates)) {
-      firstCoordinatesVisitedTwice = newCoordinates
+    let newCoordinates = {x, y};
+    for (let i = 0; i < distance; i++) {
+      newCoordinates = updateCoordinates(newCoordinates, cardinalDirection, 1)
+      if (!firstCoordinatesVisitedTwice && isInHistory(history, newCoordinates)) {
+        firstCoordinatesVisitedTwice = newCoordinates
+      }
+      history.push(newCoordinates)
     }
 
-    console.log(newCoordinates)
-
-    history.push(newCoordinates)
     return newCoordinates
   }, startCoordinates)
 
@@ -41,11 +42,12 @@ function parseInput(inputStr) {
 }
 
 function updateCardinalDirection(cardinalDirection, relativeDirection) {
+  const isRight = relativeDirection === 'R'
   switch(cardinalDirection) {
-    case 'N': return (relativeDirection === 'R') ? 'E' : 'W';
-    case 'S': return (relativeDirection === 'R') ? 'W' : 'E';
-    case 'E': return (relativeDirection === 'R') ? 'S' : 'N';
-    case 'W': return (relativeDirection === 'R') ? 'N' : 'S';
+    case 'N': return isRight ? 'E' : 'W';
+    case 'S': return isRight ? 'W' : 'E';
+    case 'E': return isRight ? 'S' : 'N';
+    case 'W': return isRight ? 'N' : 'S';
   }
 }
 
