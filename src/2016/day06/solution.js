@@ -13,15 +13,23 @@ function parseInput(inputStr) {
     return acc
   }, [])
 
-  const msg = reduceResult.map((item) => {
+  const sortableResult = reduceResult.map((item) => {
     const sortable = []
     for (var letter in item) {
       sortable.push([letter, item[letter]])
     }
-    const sorted = sortable.sort((a, b) => b[1] - a[1])
-    return sorted[0][0]
-  }).join('')
+    return sortable
+  })
 
-  // part1 answer
-  console.log(msg)
+  const sort = (arr, compareFn) => {
+    return arr.map(item => {
+      return item.sort(compareFn)[0][0]
+    }).join('')
+  }
+
+  const part1Msg = sort(sortableResult, (a, b) => b[1] - a[1])
+  const part2Msg = sort(sortableResult, (a, b) => a[1] - b[1])
+
+  console.log(part1Msg)
+  console.log(part2Msg)
 }
