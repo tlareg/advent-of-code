@@ -4,36 +4,44 @@ parseInput(inputStr)
 
 function parseInput(inputStr) {
   const lines = inputStr.split('\r\n')
-  const howManyIPv7 = lines.reduce(
-    (count, lineStr) => isIPv7(lineStr) ? ++count : count, 0
+
+  const howManySupportsTLS = lines.reduce(
+    (count, lineStr) => supportsTLS(lineStr) ? ++count : count, 0
+  )
+
+  const howManySupportsSSL = lines.reduce(
+    (count, lineStr) => supportsSSL(lineStr) ? ++count : count, 0
   )
 
   // part1 answer
-  console.log(howManyIPv7)
+  console.log(howManySupportsTLS)
+
+  // part2 answer
+  console.log(howManySupportsSSL)
 }
 
-function isIPv7(str) {
-  const { abbaParts, nonAbbaParts } = splitIPv7(str)
+function supportsTLS(str) {
+  const { supernetSeqArr, hypernetSeqArr } = splitIPv7(str)
   return (
-    abbaParts.some(part => hasABBA(part)) &&
-    !nonAbbaParts.some(part => hasABBA(part))
+    supernetSeqArr.some(part => hasABBA(part)) &&
+    !hypernetSeqArr.some(part => hasABBA(part))
   )
 }
 
 function splitIPv7(str) {
-  const abbaParts = []
-  const nonAbbaParts = []
+  const supernetSeqArr = []
+  const hypernetSeqArr = []
   const splitRes = str.split('[')
   splitRes.forEach(s => {
     const split2Res = s.split(']')
     if (split2Res.length === 1) {
-      split2Res[0] && abbaParts.push(split2Res[0])
+      split2Res[0] && supernetSeqArr.push(split2Res[0])
     } else {
-      split2Res[1] && abbaParts.push(split2Res[1])
-      split2Res[0] && nonAbbaParts.push(split2Res[0])
+      split2Res[1] && supernetSeqArr.push(split2Res[1])
+      split2Res[0] && hypernetSeqArr.push(split2Res[0])
     }
   })
-  return { abbaParts, nonAbbaParts }
+  return { supernetSeqArr, hypernetSeqArr }
 }
 
 function hasABBA(str) {
@@ -49,4 +57,45 @@ function isABBA(str) {
   if (str.length !== 4) { return false }
   if (str[0] === str[1]) { return false }
   return str === str.split('').reverse().join('')
+}
+
+function supportsSSL(str) {
+  const { supernetSeqArr, hypernetSeqArr } = splitIPv7(str)
+  const supernetABAs = findSeqArrABAs(supernetSeqArr)
+  const hypernetABAs = findSeqArrABAs(hypernetSeqArr)
+  return supernetABAs.some(
+    saba => hypernetABAs.some(haba => areCorrespondingABAs(saba, haba))
+  )
+}
+
+function findSeqArrABAs(seqArr) {
+  return seqArr.reduce((acc, str) => {
+    return [...acc, ...findABAs(str)]
+  }, [])
+}
+
+function findABAs(str) {
+  const result = []
+  if (str.length < 3) { return result }
+  for (let i = 0; i < str.length; i++) {
+    if (!str[i]) break;
+    const slice = str.slice(i, i + 3)
+    if (isABA(slice)) { 
+      result.push(slice)
+    }
+  }
+  return result
+}
+
+function isABA(str) {
+  if (str.length !== 3) { return false }
+  if (str[0] === str[1]) { return false }
+  return str === str.split('').reverse().join('')
+}
+
+function areCorrespondingABAs(aba1, aba2) {
+  return ( 
+    aba1[0] === aba2[1] &&
+    aba1[1] === aba2[0]
+  ) 
 }
