@@ -9,8 +9,35 @@ const startNode = { pos: [0, 0], path: '' }
 const endNode = { pos: [3, 3] }
 
 bfs(startNode, endNode)
+bfsLongest(startNode, endNode)
 
-function bfs(startNode, targetNode) {
+function bfsLongest(startNode, targetNode) {
+  const [ ty, tx ] = targetNode.pos
+  const queue = [ startNode ]
+  let maxDistance = 0
+  let part2 = null
+
+  while (queue.length) {
+    const currNode = queue.shift()
+    const adjacentNodes = getAdjacentNodes(currNode.pos, currNode.path)
+
+    adjacentNodes.forEach(node => {
+      const nodeKey = nodeToStr(node)
+      const [y, x] = node.pos
+      maxDistance = node.path.length
+      if (y === ty && x === tx) {
+        part2 = node.path.length
+      } else {
+        queue.push(node)
+      }
+    })
+  }
+
+  console.log(part2)
+}
+
+
+function bfs(startNode, targetNode, findLongest) {
   const [ ty, tx ] = targetNode.pos
   const queue = [ startNode ]
   const distance = { [nodeToStr(startNode)]: 0 }
