@@ -51,16 +51,42 @@ class LinkedList {
   }
 }
 
+function part1(input) {
+  const list = new LinkedList()
+  ;[...Array(input).keys()].forEach(i => list.add(new Node(i)))
+
+  let node = list.first
+  do {
+    list.remove(node.next)
+    node = node.next
+  } while(node !== node.next)
+
+  console.log(`Part 1: ${node.val + 1}`)
+}
+
+function part2() {
+  const list = new LinkedList()
+  ;[...Array(input).keys()].forEach(i => list.add(new Node(i)))
+
+  let node = list.first
+  let nodeToRemove = null
+
+  do {
+    const len = Math.floor(list.length / 2)
+    nodeToRemove = node.next
+    for (let i = 0; i < len - 1; i++) {
+      nodeToRemove = nodeToRemove.next
+    }
+    
+    list.remove(nodeToRemove)
+    node = node.next
+  } while(node !== node.next)
+
+  console.log(`Part 2: ${node.val + 1}`)
+}
+
 const input = 3005290
 // const input = 5
-const list = new LinkedList()
 
-;[...Array(input).keys()].forEach(i => list.add(new Node(i)))
-
-let node = list.first
-do {
-  list.remove(node.next)
-  node = node.next
-} while(node !== node.next)
-
-console.log(`Part 1: ${node.val + 1}`)
+// part1(input)
+part2(input)
