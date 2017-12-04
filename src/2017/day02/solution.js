@@ -12,7 +12,7 @@ const firstAnswer = inputStr.split('\r\n')
           min: n < acc.min ? n : acc.min,
           max: n > acc.max ? n : acc.max
         }
-      }, 
+      },
       { min: numsRow[0], max: numsRow[0] }
     )
     return max - min

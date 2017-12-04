@@ -4,8 +4,8 @@ const input = 361527
 console.log(solve(input))
 
 function solve(input) {
-  const initialState = { 
-    x: 0, 
+  const initialState = {
+    x: 0,
     y: 0,
     size: 1,
     dir: 'R',
@@ -16,7 +16,7 @@ function solve(input) {
 
   const { x, y, secondStar } = [...Array(input + 1).keys()].splice(2, input)
     .reduce(reducer, initialState)
-  
+
   return {
     firstStar: Math.abs(x) + Math.abs(y),
     secondStar
@@ -44,7 +44,7 @@ function reducer({ x, y, dir, size, dirChangeCount, sums, secondStar }, n) {
     newDir = getNextDir(dir)
     dirChangeCount++
   }
-  
+
   return { x: newX, y: newY, dir: newDir, size, dirChangeCount, sums, secondStar}
 }
 
