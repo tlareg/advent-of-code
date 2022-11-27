@@ -1,3 +1,5 @@
+// https://adventofcode.com/2015/day/1
+
 import { readFileSync } from 'fs'
 
 function parseInput() {
