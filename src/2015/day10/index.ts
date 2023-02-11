@@ -1,3 +1,5 @@
+// https://adventofcode.com/2015/day/10
+
 const input = '3113322113'
 
 const solution = solve(input)

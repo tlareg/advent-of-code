@@ -1,3 +1,5 @@
+// https://adventofcode.com/2015/day/11
+
 const INPUT = 'hepxcrrq'
 
 console.log(solve(INPUT))
