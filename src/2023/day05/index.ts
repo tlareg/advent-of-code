@@ -53,8 +53,8 @@ function parseNumbers(line: string) {
 
 function solve({ seeds, maps }: InputData) {
   return {
-    part1: solvePart1({ seeds, maps }),
-    part2: solvePart2({ seeds, maps }),
+    part1: solvePart1({ seeds, maps }), // ~0.25 ms
+    part2: solvePart2({ seeds, maps }), // ~5500 ms
   };
 }
 
