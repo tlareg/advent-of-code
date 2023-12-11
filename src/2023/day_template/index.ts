@@ -2,8 +2,8 @@
 
 import { readFileSync } from 'fs';
 
-const solution = solve(readLines(`${__dirname}/input.txt`));
-console.log(solution);
+const solution = solve(readLines(`${__dirname}/test_input.txt`));
+// console.log(solution);
 
 function readLines(inputFilePath: string) {
   const input = readFileSync(inputFilePath, 'utf-8');
@@ -11,6 +11,8 @@ function readLines(inputFilePath: string) {
 }
 
 function solve(inputLines: string[]) {
+  console.log(inputLines);
+
   return {
     part1: undefined,
     part2: undefined,
