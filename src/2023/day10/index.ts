@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 
 type Plan = string[][];
 
-type Point = readonly [number, number];
+type Point = readonly [number, number]; // y, x
 
 type Direction = 'top' | 'down' | 'left' | 'right';
 
@@ -13,8 +13,6 @@ type Position = {
   direction: Direction;
 };
 
-// const solution = solve(readLines(`${__dirname}/test_input.txt`));
-// const solution = solve(readLines(`${__dirname}/test_input2.txt`));
 const solution = solve(readLines(`${__dirname}/input.txt`));
 console.log(solution);
 
@@ -25,11 +23,11 @@ function readLines(inputFilePath: string) {
 
 function solve(inputLines: string[]) {
   const plan = inputLines.map((line) => line.split(''));
-  display(plan);
+  // display(plan)
 
   return {
     part1: solvePart1(plan),
-    part2: undefined,
+    part2: solvePart2(plan),
   };
 }
 
@@ -38,7 +36,7 @@ function solvePart1(plan: Plan) {
 
   let currentPositions = getStartingPositions(plan, startingPoint);
   if (currentPositions.length !== 2) {
-    throw "there should be 2 starting positions";
+    throw 'there should be 2 starting positions';
   }
 
   let stepsCount = 1;
@@ -121,28 +119,40 @@ function getStartingPositions(plan: Plan, startingPoint: Point): Position[] {
   const rightPoint = right(startingPoint);
   const leftPoint = left(startingPoint);
 
-  if (['|', 'F', '7'].includes(getVal(plan, topPoint))) {
+  if (
+    startingPoint[0] > 0 &&
+    ['|', 'F', '7'].includes(getVal(plan, topPoint))
+  ) {
     positions.push({
       direction: 'top',
       point: topPoint,
     });
   }
 
-  if (['|', 'L', 'J'].includes(getVal(plan, bottomPoint))) {
+  if (
+    startingPoint[0] <= plan.length - 1 &&
+    ['|', 'L', 'J'].includes(getVal(plan, bottomPoint))
+  ) {
     positions.push({
       direction: 'down',
       point: bottomPoint,
     });
   }
 
-  if (['-', '7', 'J'].includes(getVal(plan, rightPoint))) {
+  if (
+    startingPoint[1] <= plan[0].length - 1 &&
+    ['-', '7', 'J'].includes(getVal(plan, rightPoint))
+  ) {
     positions.push({
       direction: 'right',
       point: rightPoint,
     });
   }
 
-  if (['-', 'F', 'L'].includes(getVal(plan, leftPoint))) {
+  if (
+    startingPoint[1] > 0 &&
+    ['-', 'F', 'L'].includes(getVal(plan, leftPoint))
+  ) {
     positions.push({
       direction: 'left',
       point: leftPoint,
@@ -185,4 +195,65 @@ function left([y, x]: Point): Point {
 
 function areEqual([ya, xa]: Point, [yb, xb]: Point) {
   return ya === yb && xa === xb;
+}
+
+/**
+ * Pick's theorem (https://en.wikipedia.org/wiki/Pick%27s_theorem)
+ * loopArea = interiorPointsCount + (boundaryPointsCount / 2) - 1
+ *
+ * Part 2 answer is interiorPointsCount
+ * transforming Pick's formula:
+ * interiorPointsCount = loopArea - (boundaryPointsCount / 2) + 1
+ *
+ * boundaryPointsCount is length of loop (practically part1 answer * 2)
+ *
+ * loopArea can by calculated using Shoelace formula (https://en.wikipedia.org/wiki/Shoelace_formula):
+ * vertices = (x1, y1) (x2, y2) (x3, y3) ...
+ * 2 * loopArea = x1 * y2 - y1 * x2 + x2 * y3 - x3 * y2 + ...
+ * loopArea = result / 2
+ */
+function solvePart2(plan: Plan) {
+  // boundaryPointsCount == part1Answer * 2
+  const { vertices, boundaryPointsCount } = getLoopData(plan);
+  const loopArea = getAreaUsingShoelaceFormula(vertices);
+
+  // interiorPointsCount
+  return loopArea - boundaryPointsCount / 2 + 1;
+}
+
+function getLoopData(plan: Plan): {
+  vertices: Point[];
+  boundaryPointsCount: number;
+} {
+  const startingPoint = getStartingPoint(plan);
+  const vertices: Point[] = [startingPoint];
+
+  let boundaryPointsCount = 1;
+  let currentPosition = getStartingPositions(plan, startingPoint)[0];
+
+  while (!areEqual(currentPosition.point, startingPoint)) {
+    const val = getVal(plan, currentPosition.point);
+    if (['F', '7', 'L', 'J'].includes(val)) {
+      vertices.push(currentPosition.point);
+    }
+    currentPosition = getNextPosition(val, currentPosition);
+    boundaryPointsCount++;
+  }
+
+  return { vertices, boundaryPointsCount };
+}
+
+function getAreaUsingShoelaceFormula(vertices: Point[]): number {
+  let area = 0;
+
+  for (let i = 0; i < vertices.length; i++) {
+    const nextIndex = (i + 1) % vertices.length;
+    const [currentY, currentX] = vertices[i];
+    const [nextY, nextX] = vertices[nextIndex];
+    area += currentX * nextY - currentY * nextX;
+  }
+
+  area = Math.abs(area) / 2;
+
+  return area;
 }
