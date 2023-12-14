@@ -7,7 +7,7 @@ console.log(solution)
 
 function solve() {
   const input = readFileSync(`${__dirname}/input.txt`, 'utf-8')
-  const lines = input.split('\n').map((line) => line.trim())
+  const lines = input.replace(/\r\n/g,'\n').split('\n').map((line) => line.trim())
   const solution1 = lines.reduce((sum, line) => sum + countLine(line), 0);
   const solution2 = lines.reduce((sum, line) => sum + countLine2(line), 0);
   return { solution1, solution2 }

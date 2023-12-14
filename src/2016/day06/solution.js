@@ -3,7 +3,7 @@ const inputStr = fs.readFileSync('./input.txt').toString()
 parseInput(inputStr)
 
 function parseInput(inputStr) {
-  const arr = inputStr.split('\r\n').map(line => line.split(''))
+  const arr = inputStr.replace(/\r\n/g,'\n').split('\n').map(line => line.split(''))
   
   const reduceResult = arr.reduce((acc, item) => {
     item.map((letter, idx) => {

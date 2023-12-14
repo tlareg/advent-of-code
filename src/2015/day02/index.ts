@@ -5,7 +5,7 @@ import { readFileSync } from 'fs'
 function parseInput() {
   const input = readFileSync(`${__dirname}/input.txt`, 'utf-8')
   return input
-    .split('\n')
+    .replace(/\r\n/g,'\n').split('\n')
     .map(
       (sizeString) =>
         sizeString.split('x').map(Number) as [number, number, number]

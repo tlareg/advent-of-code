@@ -18,7 +18,7 @@ const allRequiredFuel = moduleMass => {
   }
 }
 
-const masses = inputStr.split('\r\n').map(Number)
+const masses = inputStr.replace(/\r\n/g,'\n').split('\n').map(Number)
 
 const firstStar = sum(masses.map(requiredFuel));
 console.log({ firstStar })

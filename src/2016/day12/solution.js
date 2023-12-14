@@ -5,7 +5,7 @@ solve(inputStr, { a: 0, b: 0, c: 0, d: 0 })
 solve(inputStr, { a: 0, b: 0, c: 1, d: 0 })
 
 function solve(str, state) {
-  const lines = str.split('\r\n')
+  const lines = str.replace(/\r\n/g,'\n').split('\n')
   const getVal = arg => state.hasOwnProperty(arg) ? state[arg] : parseInt(arg, 10)
   let i = 0
   while (i < lines.length) {

@@ -11,7 +11,7 @@ const {
 console.log(firstStar, secondStar)
 
 function parseInput(inputStr) {
-  return inputStr.split('\r\n').map(line => {
+  return inputStr.replace(/\r\n/g,'\n').split('\n').map(line => {
     const match = line
       .match(/^(\w+)\s+(inc|dec)\s+(-?\d+)\s+if\s+(\w+)\s+([>=<!]+)\s+(-?\d+)$/)
     return {

@@ -113,7 +113,7 @@ parseInput(inputStr)
 function parseInput(str) {
   const state = new State()
 
-  str.split('\r\n').forEach(line => parseInputLine(line, state))
+  str.replace(/\r\n/g,'\n').split('\n').forEach(line => parseInputLine(line, state))
 
   const part2answer = [0, 1, 2].reduce((acc, id) => {
     return acc * state.findOutputById(id).vals[0]

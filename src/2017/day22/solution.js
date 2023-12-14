@@ -58,7 +58,7 @@ console.log(secondStar)
 
 function parseInput(inputStr) {
   const gridMap = {}
-  const matrix = inputStr.split('\r\n').map(r => r.split(''))
+  const matrix = inputStr.replace(/\r\n/g,'\n').split('\n').map(r => r.split(''))
   matrix.forEach((r, y) => r.forEach((c, x) =>
     gridMap[`${x},${y}`] = (c === '#' ) ? 1 : 0
   ))

@@ -7,7 +7,7 @@ console.log(solveSecond(particles))
 
 function parseInput(inputStr) {
   const parseNumbersArr = str => str.split(',').map(Number)
-  return inputStr.split('\r\n').map((line, id) => {
+  return inputStr.replace(/\r\n/g,'\n').split('\n').map((line, id) => {
     const match = line.match(/^p=<(.+)>,\s+v=<(.+)>,\s+a=<(.+)>$/)
     return {
       id,

@@ -20,7 +20,7 @@ parseInput(inputStr)
 
 function parseInput(str) {
   const screen = initScreen()
-  const lines = str.split('\r\n')
+  const lines = str.replace(/\r\n/g,'\n').split('\n')
   
   lines.forEach(line => parseInputLine(line, screen))
 

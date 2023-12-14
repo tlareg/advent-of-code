@@ -26,7 +26,7 @@ const solution2 = solve(ingredients, { countCalories: true })
 console.log({ solution1, solution2 })
 
 function parseInput(input: string): Record<string, Ingredient> {
-  return input.split('\n').reduce<Record<string, Ingredient>>((acc, line) => {
+  return input.replace(/\r\n/g,'\n').split('\n').reduce<Record<string, Ingredient>>((acc, line) => {
     const { groups } = line.match(LINE_REGEXP) as unknown as {
       groups: Record<keyof Ingredient, string>
     }

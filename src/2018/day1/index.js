@@ -1,7 +1,7 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
 
-const nums = inputStr.split('\r\n').map(Number)
+const nums = inputStr.replace(/\r\n/g,'\n').split('\n').map(Number)
 
 const firstStar = nums => nums.reduce((acc, n) => acc + n, 0)
 

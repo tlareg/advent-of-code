@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 
 function parseInput() {
   const input = readFileSync(`${__dirname}/input.txt`, 'utf-8')
-  return input.split('\n')
+  return input.replace(/\r\n/g,'\n').split('\n')
 }
 
 function solve(input: ReturnType<typeof parseInput>) {

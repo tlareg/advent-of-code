@@ -3,7 +3,7 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
 
-const scanners = inputStr.split('\r\n').map(line => {
+const scanners = inputStr.replace(/\r\n/g,'\n').split('\n').map(line => {
   const [depth, range] = line.split(/:\s+/).map(Number)
   return { depth, range }
 })

@@ -2,7 +2,7 @@ const fs = require('fs')
 const [wireA, wireB] = fs
   .readFileSync('./input.txt')
   .toString()
-  .split('\r\n')
+  .replace(/\r\n/g,'\n').split('\n')
   .map(x => x.split(','))
 
 const getMap = wire => {

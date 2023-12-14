@@ -45,7 +45,7 @@ function parseInput() {
   const parseCoordsStr = (str: CoordsStr) =>
     str.split(',').map(Number) as [number, number]
 
-  return input.split('\n').map((line) => {
+  return input.replace(/\r\n/g,'\n').split('\n').map((line) => {
     const {
       groups: { command, start, end },
     } = line.match(LINE_REGEX) as unknown as LineMatch

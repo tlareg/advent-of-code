@@ -55,7 +55,7 @@ function solveSecond(data: Record<string, DeerData>, raceDuration: number) {
 
 function parseInput(input: string): Record<string, DeerData> {
   return input
-    .split('\n')
+    .replace(/\r\n/g,'\n').split('\n')
     .map((line) => {
       const {
         groups: { name, speed, flyDuration, restDuration },

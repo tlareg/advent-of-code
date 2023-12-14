@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
-const jumps = inputStr.split('\r\n').map(Number)
+const jumps = inputStr.replace(/\r\n/g,'\n').split('\n').map(Number)
 
 const first = solve(jumps, (jumps, pos) => jumps[pos] + 1)
 console.log(first)

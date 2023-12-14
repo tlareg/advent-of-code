@@ -41,7 +41,7 @@ function parseInput(inputStr) {
     'D': { 'U': 'B', 'D': 'D', 'R': 'D', 'L': 'D' },
   }
 
-  const inputLines = inputStr.split('\r\n')
+  const inputLines = inputStr.replace(/\r\n/g,'\n').split('\n')
   return {
     part1Answer: getKey(inputLines, numDirMap),
     part2Answer: getKey(inputLines, numDirMap2)

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt', 'utf8').toString()
-const lines = inputStr.split('\r\n')
+const lines = inputStr.replace(/\r\n/g,'\n').split('\n')
 const discs = lines.map(mapInputLineToDisk)
 
 console.log(`Part 1: ${findTime(discs)}`)

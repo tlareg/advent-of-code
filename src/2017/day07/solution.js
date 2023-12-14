@@ -11,7 +11,7 @@ const secondAnswer = solveSecond(programs, rootProgram)
 console.log('second star: ', secondAnswer)
 
 function parseInput(inputStr) {
-  const lines = inputStr.split('\r\n')
+  const lines = inputStr.replace(/\r\n/g,'\n').split('\n')
   const programs = {}
 
   lines.forEach(line => {

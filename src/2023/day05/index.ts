@@ -17,7 +17,7 @@ type InputData = { seeds: number[]; maps: GardenMap[] };
 
 function readInput(inputFilePath: string): InputData {
   const input = readFileSync(inputFilePath, 'utf-8');
-  const inputLines = input.split('\n');
+  const inputLines = input.replace(/\r\n/g, '\n').split('\n');
   const [seedsLine, ...otherLines] = inputLines;
   const seeds: number[] = parseNumbers(seedsLine.split(':')[1]);
   const maps: GardenMap[] = [];

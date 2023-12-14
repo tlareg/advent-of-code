@@ -9,6 +9,7 @@ type Pattern = string[][];
 
 function readInput(inputFilePath: string) {
   return readFileSync(inputFilePath, 'utf-8')
+    .replace(/\r\n/g, '\n')
     .split('\n')
     .reduce<Pattern[]>(
       (patterns, line) => {

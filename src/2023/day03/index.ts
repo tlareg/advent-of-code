@@ -7,7 +7,7 @@ console.log(solution);
 
 function readLines(inputFilePath: string) {
   const input = readFileSync(inputFilePath, 'utf-8');
-  return input.split('\n');
+  return input.replace(/\r\n/g, '\n').split('\n');
 }
 
 function solve(inputLines: string[]) {

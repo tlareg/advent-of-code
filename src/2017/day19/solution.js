@@ -1,7 +1,7 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
 
-const diagram = inputStr.split('\r\n').map(
+const diagram = inputStr.replace(/\r\n/g,'\n').split('\n').map(
   line => line.split('').map(s => s.trim())
 )
 

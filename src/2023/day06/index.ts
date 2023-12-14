@@ -12,7 +12,7 @@ console.log(solution);
 
 function readLines(inputFilePath: string) {
   const input = readFileSync(inputFilePath, 'utf-8');
-  return input.split('\n');
+  return input.replace(/\r\n/g, '\n').split('\n');
 }
 
 function solve(inputLines: string[]) {
@@ -46,11 +46,7 @@ function solvePart2(inputLines: string[]) {
 }
 
 function parseLineForPart2(line: string) {
-  const num = line
-    .split(':')[1]
-    .trim()
-    .split(/\s+/)
-    .join('')
+  const num = line.split(':')[1].trim().split(/\s+/).join('');
   return parseInt(num, 10);
 }
 

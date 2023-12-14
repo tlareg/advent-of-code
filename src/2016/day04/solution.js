@@ -4,7 +4,7 @@ const answers = parseInput(inputStr)
 console.log(answers)
 
 function parseInput(inputStr) {
-  const lines = inputStr.split('\r\n')
+  const lines = inputStr.replace(/\r\n/g,'\n').split('\n')
   let idSum = 0
   
   lines.forEach(line => {

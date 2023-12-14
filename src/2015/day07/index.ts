@@ -25,7 +25,7 @@ function parseInput() {
   const input = readFileSync(`${__dirname}/input.txt`, 'utf-8')
   const wires: Wires = {}
 
-  input.split('\n').forEach((line) => {
+  input.replace(/\r\n/g,'\n').split('\n').forEach((line) => {
     const [src, dst] = line.split('->').map((x) => x.trim())
     wires[dst] = src
   })

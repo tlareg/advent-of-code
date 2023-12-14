@@ -1,7 +1,7 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
 
-const lines = inputStr.split('\r\n')
+const lines = inputStr.replace(/\r\n/g,'\n').split('\n')
 
 const showRecords = records =>
   console.log(records.map(r => ({ ...r, date: r.date.toString() })))

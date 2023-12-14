@@ -5,7 +5,7 @@ const rules = parseInput(inputStr)
 console.log(solve(rules))
 
 function parseInput(inputStr) {
-  return inputStr.split('\r\n').map(line => {
+  return inputStr.replace(/\r\n/g,'\n').split('\n').map(line => {
     const match = line.match(/^(.+)\s+=>\s+(.+)$/)
     return {
       condition: patternToMatrix(match[1]),

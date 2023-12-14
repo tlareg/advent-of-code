@@ -6,7 +6,7 @@ console.log(solveFirst(components))
 console.log(solveSecond(components))
 
 function parseInput(inputStr) {
-  return inputStr.split('\r\n')
+  return inputStr.replace(/\r\n/g,'\n').split('\n')
     .map(line => line.split('/').map(Number))
     .map(([a, b], id) => ({ id, a, b }))
 }

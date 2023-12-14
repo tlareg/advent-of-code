@@ -5,7 +5,7 @@ const MAX = 4294967295
 parseInput(inputStr)
 
 function parseInput(str) {
-  const ranges = str.split('\r\n').map(
+  const ranges = str.replace(/\r\n/g,'\n').split('\n').map(
     x => x.split('-').map(i => parseInt(i, 10))
   ).sort((a, b) => a[0] - b[0])
 

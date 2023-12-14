@@ -21,7 +21,7 @@ const isValid2 = words => {
 
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
-const passphrases = inputStr.split('\r\n').map(line => line.split(/\s+/))
+const passphrases = inputStr.replace(/\r\n/g,'\n').split('\n').map(line => line.split(/\s+/))
 
 const firstAnswer = passphrases.filter(isValid).length
 console.log(firstAnswer)

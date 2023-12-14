@@ -3,7 +3,7 @@
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt').toString()
 
-const firstAnswer = inputStr.split('\r\n')
+const firstAnswer = inputStr.replace(/\r\n/g,'\n').split('\n')
   .map(line => {
     const numsRow = line.split(/\s+/).map(Number)
     const { min, max } = numsRow.reduce(
@@ -21,7 +21,7 @@ const firstAnswer = inputStr.split('\r\n')
 
 console.log(firstAnswer)
 
-const secondAnswer = inputStr.split('\r\n')
+const secondAnswer = inputStr.replace(/\r\n/g,'\n').split('\n')
   .map(line => {
     const numsRow = line.split(/\s+/).map(Number)
     for (let i = 0; i < numsRow.length; i++) {

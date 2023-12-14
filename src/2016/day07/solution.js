@@ -3,7 +3,7 @@ const inputStr = fs.readFileSync('./input.txt').toString()
 parseInput(inputStr)
 
 function parseInput(inputStr) {
-  const lines = inputStr.split('\r\n')
+  const lines = inputStr.replace(/\r\n/g,'\n').split('\n')
 
   const howManySupportsTLS = lines.reduce(
     (count, lineStr) => supportsTLS(lineStr) ? ++count : count, 0

@@ -13,7 +13,7 @@ Array.prototype.rotate = (function() {
 
 const fs = require('fs')
 const inputStr = fs.readFileSync('./input.txt', 'utf8').toString()
-const instructions = inputStr.split('\r\n')
+const instructions = inputStr.replace(/\r\n/g,'\n').split('\n')
 
 const strToScramble = 'abcdefgh'
 const part1 = scramble(strToScramble, instructions)

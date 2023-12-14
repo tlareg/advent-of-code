@@ -18,7 +18,7 @@ console.log(solveFirst(instructions))
 console.log(solveSecond(instructions))
 
 function parseInput(inputStr) {
-  return inputStr.split('\r\n').map(line => {
+  return inputStr.replace(/\r\n/g,'\n').split('\n').map(line => {
     return line.split(/\s+/)
   })
 }

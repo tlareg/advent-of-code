@@ -14,7 +14,7 @@ function parseInput() {
 
   const edges: Edges = {}
 
-  input.split('\n').forEach((line) => {
+  input.replace(/\r\n/g,'\n').split('\n').forEach((line) => {
     const { groups } = line.trim().match(LINE_REGEXP) ?? {}
     const { from, to, distance: distanceStr } = groups ?? {}
     const distance = parseInt(distanceStr ?? '', 10)

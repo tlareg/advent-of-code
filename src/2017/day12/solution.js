@@ -69,7 +69,7 @@ function solve(inputStr) {
   const nodesRepo = new NodesRepo()
   const groupsRepo = new GroupsRepo(nodesRepo)
 
-  inputStr.split('\r\n').forEach((line) => {
+  inputStr.replace(/\r\n/g,'\n').split('\n').forEach((line) => {
     const match = line.match(/^(\d+)\s+<->\s+(.+)$/)
     const nodeId = Number(match[1])
     const adjacentIds = match[2].split(/,\s/).map(Number)

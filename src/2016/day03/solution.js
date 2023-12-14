@@ -5,7 +5,7 @@ console.log(answers)
 
 function parseInput(inputStr) {
   const horizontalNums = inputStr
-    .split('\r\n')
+    .replace(/\r\n/g,'\n').split('\n')
     .map(
       line => line
         .trim()

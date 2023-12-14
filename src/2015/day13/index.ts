@@ -47,7 +47,7 @@ function solve(input: string) {
 }
 
 function parseInput(input: string): People {
-  const rules: Rule[] = input.split('\n').map((line) => {
+  const rules: Rule[] = input.replace(/\r\n/g,'\n').split('\n').map((line) => {
     const { groups } = line.match(LINE_REGEXP) || {}
     return { ...groups, units: parseInt(groups?.units ?? '', 10) } as Rule
   })

@@ -5,7 +5,7 @@ const blueprint = parseInput(inputStr)
 console.log(solve(blueprint))
 
 function parseInput(inputStr) {
-  const inputLines = inputStr.split('\r\n').filter(l => !!l)
+  const inputLines = inputStr.replace(/\r\n/g,'\n').split('\n').filter(l => !!l)
   let pos = 0
   const beginState = inputLines[pos++].match(/^.*state\s+(\w).$/)[1]
   const steps = Number(inputLines[pos++].match(/^.*after\s+(\d+)\s+steps.$/)[1])
