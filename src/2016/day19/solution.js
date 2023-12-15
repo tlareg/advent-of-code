@@ -53,40 +53,54 @@ class LinkedList {
 
 function part1(input) {
   const list = new LinkedList()
-  ;[...Array(input).keys()].forEach(i => list.add(new Node(i)))
+  ;[...Array(input).keys()].forEach((i) => list.add(new Node(i)))
 
   let node = list.first
   do {
     list.remove(node.next)
     node = node.next
-  } while(node !== node.next)
+  } while (node !== node.next)
 
   console.log(`Part 1: ${node.val + 1}`)
 }
 
-function part2() {
+// returns correct answer for test data, but not fast enough for real input
+function brutePart2(input) {
   const list = new LinkedList()
-  ;[...Array(input).keys()].forEach(i => list.add(new Node(i)))
+  ;[...Array(input).keys()].forEach((i) => list.add(new Node(i)))
 
   let node = list.first
   let nodeToRemove = null
 
   do {
     const len = Math.floor(list.length / 2)
+
     nodeToRemove = node.next
     for (let i = 0; i < len - 1; i++) {
       nodeToRemove = nodeToRemove.next
     }
-    
     list.remove(nodeToRemove)
+
     node = node.next
-  } while(node !== node.next)
+  } while (node !== node.next)
 
   console.log(`Part 2: ${node.val + 1}`)
 }
 
-const input = 3005290
-// const input = 5
+function part2(input) {
+  let winner = 1
 
-// part1(input)
+  for (let i = 1; i < input; i++) {
+    winner = (winner % i) + 1
+    if (winner > (i + 1) / 2) {
+      winner++
+    }
+  }
+
+  console.log(`Part 2: ${winner}`)
+}
+
+const input = 3005290
+
+part1(input)
 part2(input)
