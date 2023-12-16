@@ -2,12 +2,13 @@
 
 import { readFileSync } from 'fs';
 
-const solution = solve(readLines(`${__dirname}/test_input.txt`));
+const solution = solve(readInput(`${__dirname}/test_input.txt`));
 // console.log(solution);
 
-function readLines(inputFilePath: string) {
-  const input = readFileSync(inputFilePath, 'utf-8');
-  return input.replace(/\r\n/g, '\n').split('\n');
+function readInput(inputFilePath: string) {
+  return readFileSync(inputFilePath, 'utf-8')
+    .replace(/\r\n/g, '\n')
+    .split('\n');
 }
 
 function solve(inputLines: string[]) {
