@@ -1,0 +1,16 @@
+{
+  "name": "aoc2024",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "ts-node",
+    "watch": "ts-node-dev --respawn",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
