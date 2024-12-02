@@ -19,3 +19,11 @@ to run one time:
 ```sh
 npm start ./day01
 ```
+
+---
+
+to run tests for day
+
+```sh
+npm test ./day01
+```
