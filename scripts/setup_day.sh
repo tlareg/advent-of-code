@@ -24,7 +24,7 @@ INDEX_FILE="${TARGET_DIR}/index.ts"
 if [ ! -f "$INDEX_FILE" ]; then
     echo "Creating index.ts in $TARGET_DIR"
     cat > "$INDEX_FILE" <<EOL
-// https://adventofcode.com/${YEAR}/day/${DAY}
+// https://adventofcode.com/${YEAR}/day/${DAY_RAW}
 
 import { readFileSync } from 'fs';
 

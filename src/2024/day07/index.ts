@@ -1,4 +1,4 @@
-// https://adventofcode.com/2024/day/07
+// https://adventofcode.com/2024/day/7
 
 import { readFileSync } from 'fs';
 import { memoize } from '../../lib';
