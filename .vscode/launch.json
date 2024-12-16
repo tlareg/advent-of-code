@@ -5,23 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch via NPM",
-      "request": "launch",
-      "runtimeArgs": [
-        "run-script",
-        "debug"
-      ],
-      "runtimeExecutable": "npm",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "node"
-    },
-    {
+      "name": "debug AOC npm",
       "type": "node-terminal",
-      "name": "Run Script: start",
       "request": "launch",
-      "command": "npm run start day15",
+      "command": "npm start day16",
       "cwd": "${workspaceFolder}\\src\\2024"
     }
   ]
