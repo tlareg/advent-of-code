@@ -1,4 +1,6 @@
-export function memoize<TArgs extends unknown[], TResult>(fn: Function): Function {
+export function memoize<TArgs extends unknown[], TResult>(
+  fn: Function
+): Function {
   const cache = new Map<string, TResult>();
 
   return (...args: TArgs) => {
