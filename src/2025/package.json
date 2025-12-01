@@ -1,5 +1,5 @@
 {
-  "name": "aoc2024",
+  "name": "aoc2025",
   "version": "0.0.1",
   "scripts": {
     "start": "ts-node",
