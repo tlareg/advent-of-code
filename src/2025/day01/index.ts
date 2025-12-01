@@ -11,8 +11,38 @@ function readLines(inputFilePath: string) {
 }
 
 function solve(inputLines: string[]) {
-  console.log(inputLines);
+  let currentVal = 50;
+  let zeroCount = 0;
+
+  for (const rotation of inputLines) {
+    currentVal = applyRotation(currentVal, rotation);
+    if (currentVal === 0) {
+      zeroCount++;
+    }
+  }
+
   return {
-    part1: undefined,
+    part1: zeroCount,
   };
+}
+
+function applyRotation(currentVal: number, rotation: string): number {
+  const { dir, value } = rotation.match(/^(?<dir>R|L)(?<value>\d+)$/)
+    ?.groups as { dir: string; value: string };
+
+  const n = parseInt(value, 10);
+
+  if (dir === 'R') {
+    return normalize(currentVal + n);
+  }
+
+  if (dir === 'L') {
+    return normalize(currentVal - n);
+  }
+
+  throw 'Invalid dir';
+}
+
+function normalize(val: number): number {
+  return ((val % 100) + 100) % 100;
 }
